@@ -8,8 +8,12 @@ int printGuess(int, char *);
 
 int main()
 {
+    int mistakes = 0, length = 0;
     char *word = wordpick();
-    int mistakes = 0;
+    char guessed[sizeof(word)];
+    
+    for(length; word[length] != '\0'; length++)
+        guessed[length] = '\0';
 
     // Choose the amount of lives you have to guess the word before you lose
     printf("Hangman\n3 or 6 lives? ");
