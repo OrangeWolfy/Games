@@ -1,7 +1,8 @@
 #include<stdlib.h>
+#include<string.h>
 #include<time.h>
 
-// Remeber to modify #define variables and words array values when adding more or longer words
+// Modify #define variables and words array values when adding more or longer words
 
 #define WORDSCOUNT 3
 #define WORDSLENGTH 64
