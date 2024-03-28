@@ -54,6 +54,12 @@ int playerVScomputer()
         computer = 'X';
     else return -1;
 
+#ifdef _WIN32
+    system("cls");
+#elif __linux__
+    system("clear");
+#endif
+
     // Decide if it's 'X' or 'O' turn by counting until it hits 9 when the board must be filled and check if the player is playing 'X' or 'O'
     turns = 0;
     win = 0;
@@ -88,17 +94,23 @@ int playerVSplayer()
 {
     int win, turns;
 
+#ifdef _WIN32
+    system("cls");
+#elif __linux__
+    system("clear");
+#endif
+
     // Decide if it's 'X' or 'O' turn by counting until it hits 9 when the board must be filled and check if the player is playing 'X' or 'O'
     turns = 0;
     win = 0;
     while(turns <= 9 && win == 0)
     {
         if(turns % 2 == 0){
-            printf("\nX turn\n");
+            printf("X turn\n");
             if(playerMove('X') == 0) turns++; 
         }
         else{
-            printf("\nO turn\n");
+            printf("O turn\n");
             if(playerMove('O') == 0) turns++; 
         }
         win = checkWinner();
@@ -115,18 +127,26 @@ int playerMove(char piece)
     // Ask for coordinates from the player where he wants to play
     printf("Row: ");
     scanf("%d", &row);
-    row--;
     printf("Column: ");
     scanf("%d", &column);
-    column--;
 
-    
+#ifdef _WIN32
+    system("cls");
+#elif __linux__
+    system("clear");
+#endif
+
+
     // Check if the position is empty to play and if it's not subtract one from turns to go again
-    if(board[row][column] == ' '){
-        board[row][column] = piece;
-        return 0;
+    if(row >= 1 && row <= 3 && column >= 1 && column <= 3){
+        row--;
+        column--;
+        if(board[row][column] == ' '){
+            board[row][column] = piece;
+            return 0;
+        }
     }
-    printf("\nInvalid place\n");
+    printf("Invalid place\n");
     return -1;
 }
 
@@ -179,12 +199,14 @@ int checkWinner()
     }
 
     // Check diagonals and return 1 if 'X' completed a diagonal or 2 if 'O' did
-    if(board[1][1] == 'X')
+    if(board[1][1] == 'X'){
         if((board[0][0] == 'X' && board[2][2] == 'X') || (board[0][2] == 'X' && board[2][0] == 'X'))
             return 1;
-    else if(board[1][1] == 'O')
+    }
+    else if(board[1][1] == 'O'){
         if((board[0][0] == 'O' && board[2][2] == 'O') || (board[0][2] == 'O' && board[2][0] == 'O'))
             return 2;
+    }
 
     // Check if the count of rows and columns if 3 or -3 meaning from the previous loop that a row or column was completed by 'X' or 'O'
     if(columnCount == 3)
