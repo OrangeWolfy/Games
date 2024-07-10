@@ -15,9 +15,9 @@ int main()
 
     for(int i = 0; word[i] != '\0'; i++) {
         guessed[i] = '\0';
-		if(word[i] == ' ')
-			guessed[i] = word[i];
-	}
+	if(word[i] == ' ')
+	    guessed[i] = word[i];
+    }
 
     // Choose the amount of lives you have to guess the word before you lose
     printf("Hangman\n3 or 6 lives? ");
