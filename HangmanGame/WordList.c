@@ -14,12 +14,14 @@ char words[WORDSCOUNT][WORDSLENGTH] = {
     "key"
 };
 
-char* wordpick()
-{
-    char *wordPick = malloc(WORDSLENGTH);
-    
+char* wordpick(int *length)
+{    
     srand(time(NULL));
-    strcpy(wordPick, words[rand() % WORDSCOUNT]);    
+    int randomNum = rand() % WORDSCOUNT;
+	*length = strlen(words[randomNum]);
+    
+    char *wordPick = malloc(*length);
+    strcpy(wordPick, words[randomNum]);
     
     return wordPick;
 }
