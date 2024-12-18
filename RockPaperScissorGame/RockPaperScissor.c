@@ -15,7 +15,7 @@ int main()
 
     // Get the computers pick
     srand(time(NULL));
-    int computer = rand() % 3 + 1;
+    int computer = rand() % 3;
     
     game(tolower(pick), computer);
 
@@ -32,13 +32,13 @@ void game(char pick, int computer)
     // ROCK = 1, PAPER = 2, SCISSOR = 3
     switch(pick){
         case 'r':
-            player = 1;
+            player = 0;
             break;
         case 'p':
-            player = 2;
+            player = 1;
             break;
         case 's':
-            player = 3;
+            player = 2;
             break;
         default:
             printf("Wrong key");
@@ -47,8 +47,26 @@ void game(char pick, int computer)
     printf("\nYou: %s\n", options[player]);
     printf("Compter: %s\n", options[computer]);
 
-    // Calculate the winner by a subtraction where if it's the same it's a tie, if it's to the right you lose and if it's to the left you win
-    winner = abs(player - computer);
+    // Determine the winner
+	
+	switch(player) {
+		case 0:
+			if(computer == 0) winner = 0;
+			else if(computer == 1) winner = 2;
+			else winner = 1;
+			break;
+		case 1:
+			if(computer == 0) winner = 1;
+			else if(computer == 1) winner = 0;
+			else winner = 2;
+			break;
+		case 2:
+			if(computer == 0) winner = 2;
+			else if(computer == 1) winner = 1;
+			else winner = 0;
+			break;
+	}
+
     if(winner == 1)
         printf("You Win");
     else if(winner == 2)
